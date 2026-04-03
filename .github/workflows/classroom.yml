@@ -1,0 +1,164 @@
+name: Autograding Tests
+
+on:
+  - push
+  - repository_dispatch
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Case 01 - contoh resmi
+        id: case-01
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 01 - contoh resmi
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "a)b(c)d)"
+          expected-output: "ab(c)d"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 02 - sudah valid
+        id: case-02
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 02 - sudah valid
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "(ab)c"
+          expected-output: "(ab)c"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 03 - semua buka
+        id: case-03
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 03 - semua buka
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "((("
+          expected-output: ""
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 04 - semua tutup
+        id: case-04
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 04 - semua tutup
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: ")))"
+          expected-output: ""
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 05 - huruf tanpa kurung
+        id: case-05
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 05 - huruf tanpa kurung
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "abc def"
+          expected-output: "abc def"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 06 - satu tutup berlebih di depan
+        id: case-06
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 06 - satu tutup berlebih di depan
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: ")a(b)c"
+          expected-output: "a(b)c"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 07 - satu buka berlebih di belakang
+        id: case-07
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 07 - satu buka berlebih di belakang
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "a(b(c)"
+          expected-output: "ab(c)"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 08 - campuran unik
+        id: case-08
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 08 - campuran unik
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "((a)"
+          expected-output: "(a)"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 09 - nested valid setelah hapus satu
+        id: case-09
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 09 - nested valid setelah hapus satu
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "a((b)"
+          expected-output: "a(b)"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Case 10 - valid kompleks
+        id: case-10
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: Case 10 - valid kompleks
+          setup-command: gcc -std=c11 -O2 -Wall -Wextra -o soal1 soal1.c
+          command: ./soal1
+          input: "x(y(z))"
+          expected-output: "x(y(z))"
+          comparison-method: exact
+          timeout: 2
+          max-score: 10
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          CASE-01_RESULTS: "${{steps.case-01.outputs.result}}"
+          CASE-02_RESULTS: "${{steps.case-02.outputs.result}}"
+          CASE-03_RESULTS: "${{steps.case-03.outputs.result}}"
+          CASE-04_RESULTS: "${{steps.case-04.outputs.result}}"
+          CASE-05_RESULTS: "${{steps.case-05.outputs.result}}"
+          CASE-06_RESULTS: "${{steps.case-06.outputs.result}}"
+          CASE-07_RESULTS: "${{steps.case-07.outputs.result}}"
+          CASE-08_RESULTS: "${{steps.case-08.outputs.result}}"
+          CASE-09_RESULTS: "${{steps.case-09.outputs.result}}"
+          CASE-10_RESULTS: "${{steps.case-10.outputs.result}}"
+        with:
+          runners: case-01,case-02,case-03,case-04,case-05,case-06,case-07,case-08,case-09,case-10
