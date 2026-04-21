@@ -1,4 +1,4 @@
-/** EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
+ /** EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
  *   Modul               : 2 - Data Manipulation and External Files
  *   Hari dan Tanggal    : Selasa, 21 April 2026
  *   Nama (NIM)          : Darfis Ahmad Dostriano (13224096)
@@ -10,16 +10,14 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
  * 
  */
 
+
  #include <stdio.h>
  #include <string.h>
 
  int main() {
     char str[256];
-    fgets(str, sizeof(str), stdin);
+    scanf("%s", str);
     int len = strlen(str);
-    if (str[len - 1] == '\n') {
-        str[--len] = '\0';
-    }
 
     int karakter[256];
     for (int i = 0; i < len; i++) {
