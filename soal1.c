@@ -32,7 +32,6 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
         else if (str[i] == ')') {
             BukaKurung > 0;
             BukaKurung--;
-            karakter[i] = 0;
         }
     //     else {
     //         karakter[i] = 0;  
@@ -47,7 +46,6 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
         else if (str[i] == ')') {
             TutupKurung > 0;
             TutupKurung--;
-            karakter[i] = 0;
         } 
     //     else {
     //             karakter[i] = 0;  
