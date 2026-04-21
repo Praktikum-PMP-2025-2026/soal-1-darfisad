@@ -30,7 +30,7 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
             BukaKurung++;  
         }  
         else if (str[i] == ')') {
-            if (BukaKurung > 0)
+            BukaKurung > 0;
             BukaKurung--;
         }
     //     else {
@@ -44,7 +44,7 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
             TutupKurung++;
         }
         else if (str[i] == ')') {
-            if (TutupKurung > 0)
+            TutupKurung > 0;
             TutupKurung--;
         } 
     //     else {
