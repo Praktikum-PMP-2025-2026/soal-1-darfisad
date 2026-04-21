@@ -10,18 +10,24 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
  * 
  */
 
-
  #include <stdio.h>
  #include <string.h>
 
  int main() {
     char str[256];
-    scanf("%s", str);
+    fgets(str, sizeof(str), stdin);
     int len = strlen(str);
+    if (str[len - 1] == '\n') {
+        str[--len] = '\0';
+    }
 
     int karakter[256];
     for (int i = 0; i < len; i++) {
-        karakter[i] = 1;
+        if (str[i] == ' ') {
+            karakter[i] = 0;
+        } else {
+            karakter[i] = 1;
+        }
     }
 
     int BukaKurung = 0;
