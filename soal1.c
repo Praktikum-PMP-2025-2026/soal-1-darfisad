@@ -24,19 +24,28 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
         tetapkanHuruf[i] = 1;
     }
 
-    int hitungBukaKurung = 0;
+    int BukaKurung = 0;
     for (int i = 0; i < len; i++) {
         if (str[i] == '(') {
-            hitungBukaKurung++;
-        }  else {
-                tetapkanHuruf[i] = 0;  
+            BukaKurung++;
+        }  
+        else if (str[i] == ')') {
+            if (BukaKurung > 0)
+            BukaKurung--;
+        }
+        else {
+            tetapkanHuruf[i] = 0;  
             }
         }
 
-    int hitungTutupKurung = 0;
+    int TutupKurung = 0;
     for (int i = len - 1; i >= 0; i--) {
         if (str[i] == ')') {
-            hitungTutupKurung++;
+            TutupKurung++;
+        }
+        else if (str[i] == ')') {
+            if (TutupKurung > 0)
+            TutupKurung--;
         } 
         else {
                 tetapkanHuruf[i] = 0;  
@@ -52,5 +61,4 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
     }
     hasil[j] = '\0';
     printf("%s\n", hasil);
-    return 0;
  }
