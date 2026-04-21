@@ -39,13 +39,14 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
     }
 
     int TutupKurung = 0;
-    for (int i = len; i >= 0; i--) {
+    for (int i = len - 1; i >= 0; i--) {
         if (str[i] == ')') {
             TutupKurung++;
         }
-        else if (str[i] == ')') {
-            if (TutupKurung > 0)
-            TutupKurung--;
+        else if (str[i] == '(') {
+            if (TutupKurung > 0) {
+                TutupKurung--;
+            }
             else {
                 karakter[i] = 0;  
             }
