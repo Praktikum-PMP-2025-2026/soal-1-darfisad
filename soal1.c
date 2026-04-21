@@ -30,12 +30,12 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
             BukaKurung++;  
         }  
         else if (str[i] == ')') {
-            BukaKurung > 0;
+            if (BukaKurung > 0)
             BukaKurung--;
+            else {
+            karakter[i] = 0;  
+            }
         }
-    //     else {
-    //         karakter[i] = 0;  
-    //     }
     }
 
     int TutupKurung = 0;
@@ -44,12 +44,12 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
             TutupKurung++;
         }
         else if (str[i] == ')') {
-            TutupKurung > 0;
+            if (TutupKurung > 0)
             TutupKurung--;
+            else {
+                karakter[i] = 0;  
+            }
         } 
-    //     else {
-    //             karakter[i] = 0;  
-    //     }
     }
 
     char hasil[256];
