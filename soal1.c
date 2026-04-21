@@ -23,11 +23,7 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
 
     int karakter[256];
     for (int i = 0; i < len; i++) {
-        if (str[i] == ' ') {
-            karakter[i] = 0;
-        } else {
-            karakter[i] = 1;
-        }
+        karakter[i] = 1;
     }
 
     int BukaKurung = 0;
