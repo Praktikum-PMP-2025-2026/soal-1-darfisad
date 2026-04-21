@@ -19,27 +19,27 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
     scanf("%s", str);
     int len = strlen(str);
 
-    int tetapkanHuruf[256];
+    int karakter[256];
     for (int i = 0; i < len; i++) {
-        tetapkanHuruf[i] = 1;
+        karakter[i] = 1;
     }
 
     int BukaKurung = 0;
     for (int i = 0; i < len; i++) {
         if (str[i] == '(') {
-            BukaKurung++;
+            BukaKurung++;  
         }  
         else if (str[i] == ')') {
             if (BukaKurung > 0)
             BukaKurung--;
         }
-        else {
-            tetapkanHuruf[i] = 0;  
-            }
-        }
+    //     else {
+    //         karakter[i] = 0;  
+    //     }
+    }
 
     int TutupKurung = 0;
-    for (int i = len - 1; i >= 0; i--) {
+    for (int i = len; i >= 0; i--) {
         if (str[i] == ')') {
             TutupKurung++;
         }
@@ -47,18 +47,19 @@ agar struktur teks kembali valid, tanpa mengubah urutan karakter lainnya.
             if (TutupKurung > 0)
             TutupKurung--;
         } 
-        else {
-                tetapkanHuruf[i] = 0;  
-            }
-        }
+    //     else {
+    //             karakter[i] = 0;  
+    //     }
+    }
 
     char hasil[256];
     int j = 0;
     for (int i = 0; i < len; i++) {
-        if (tetapkanHuruf[i]) {
+        if (karakter[i]) {
             hasil[j++] = str[i];
         }
     }
     hasil[j] = '\0';
     printf("%s\n", hasil);
+    return 0;
  }
